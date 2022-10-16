@@ -1,4 +1,9 @@
 {
-  "semi": false,
-  "trailingComma": "es5"
+	"useTabs": true,
+	"singleQuote": true,
+	"semi": false,
+	"trailingComma": "es5",
+	"plugins": ["prettier-plugin-svelte"],
+	"pluginSearchDirs": ["."],
+	"overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }

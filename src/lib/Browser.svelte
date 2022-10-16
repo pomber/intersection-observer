@@ -1,4 +1,6 @@
 <script>
+	import Overlay from './Overlay.svelte'
+
 	let top = 100
 	let moving = false
 
@@ -26,6 +28,8 @@
 		}
 	}
 </script>
+
+<Overlay {top} {browserHeight} />
 
 <div
 	class="browser"

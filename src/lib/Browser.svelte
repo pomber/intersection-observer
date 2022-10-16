@@ -56,6 +56,7 @@
 		position: absolute;
 		user-select: none;
 		cursor: move;
+		box-shadow: 0px 0px 2px 1px hsl(261deg 55% 80%);
 	}
 	.chrome-top {
 		height: 25px;

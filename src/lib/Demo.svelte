@@ -1,8 +1,9 @@
 <script>
+	import Boxes from './Boxes.svelte'
 	import Browser from './Browser.svelte'
 </script>
 
-<div class="demo"><Browser /></div>
+<div class="demo"><Boxes /><Browser /></div>
 
 <style>
 	.demo {

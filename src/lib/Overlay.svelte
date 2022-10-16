@@ -34,6 +34,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0, 0, 0, 0.5);
+		background: hsl(216deg 28% 7% / 60%);
+		transition: opacity 0.2s;
 	}
 </style>

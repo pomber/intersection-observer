@@ -1,0 +1,60 @@
+<script>
+	import { boxes } from './stores'
+</script>
+
+<div class="boxes">
+	{#each $boxes as box (box.id)}
+		<div
+			class="box"
+			style:top="{box.top}px"
+			style:height="{box.height}px"
+			style:width="{box.width}px"
+			style:left="{box.left}px"
+			style:opacity={box.opacity}
+			style:text-align={box.textAlign}
+		>
+			{box.threshold}
+		</div>
+	{/each}
+</div>
+
+<style>
+	.boxes {
+		font-family: monospace;
+		font-size: 1.2rem;
+		color: hsl(261deg 55% 15%);
+	}
+	.box {
+		position: absolute;
+		background: hsl(261deg 55% 90% / 80%);
+		border-radius: 4px;
+		border: 1px solid hsl(261deg 55% 30% / 80%);
+
+		writing-mode: vertical-rl;
+		line-height: 1em;
+		padding: 0.4em 0;
+		letter-spacing: -0.1ch;
+		box-sizing: border-box;
+		transition: background 0.2s, top 0.4s, left 0.4s, height 0.4s ease;
+	}
+	.last {
+		background: hsl(261deg 55% 42%);
+		color: #e1e4e8;
+	}
+	.on .last {
+		animation: focus 0.5s;
+	}
+
+	@keyframes focus {
+		0% {
+			filter: brightness(1);
+		}
+		30% {
+			filter: brightness(1.6);
+			background-color: hsl(261deg 55% 47%);
+		}
+		100% {
+			filter: brightness(1);
+		}
+	}
+</style>

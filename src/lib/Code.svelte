@@ -23,7 +23,7 @@
 		position: relative;
 		white-space: normal;
 	}
-	pre ::selection {
+	:global(pre ::selection) {
 		background-color: #58a6ff33;
 	}
 </style>

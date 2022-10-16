@@ -37,13 +37,13 @@
 		box-sizing: border-box;
 		transition: background 0.2s, top 0.4s, left 0.4s, height 0.4s ease;
 	}
-	.last {
+	/* .last {
 		background: hsl(261deg 55% 42%);
 		color: #e1e4e8;
 	}
 	.on .last {
 		animation: focus 0.5s;
-	}
+	} */
 
 	@keyframes focus {
 		0% {

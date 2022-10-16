@@ -13,6 +13,7 @@ export const settings = writable({
 	browserHeight: 200,
 	pageHeight: 620,
 	boxWidth: 20,
+	title: 'a web page',
 	elements: [
 		{
 			id: '#one',

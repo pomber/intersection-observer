@@ -1,9 +1,14 @@
 <script>
 	import Boxes from './Boxes.svelte'
 	import Browser from './Browser.svelte'
+	import Page from './Page.svelte'
 </script>
 
-<div class="demo"><Boxes /><Browser /></div>
+<div class="demo">
+	<Page />
+	<Boxes />
+	<Browser />
+</div>
 
 <style>
 	.demo {

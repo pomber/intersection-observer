@@ -1,8 +1,8 @@
 <script>
-	import { boxes } from './stores'
+	import { boxes, entries, isOff } from './stores'
 </script>
 
-<div class="boxes">
+<div class="boxes {$isOff ? 'off' : 'on'}">
 	{#each $boxes as box (box.id)}
 		<div
 			class="box"
@@ -12,8 +12,9 @@
 			style:left="{box.left}px"
 			style:opacity={box.opacity}
 			style:text-align={box.textAlign}
+			class:last={$entries.some((e) => e.box === box)}
 		>
-			{box.threshold}
+			{box.threshold.toFixed(2)}
 		</div>
 	{/each}
 </div>
@@ -37,13 +38,13 @@
 		box-sizing: border-box;
 		transition: background 0.2s, top 0.4s, left 0.4s, height 0.4s ease;
 	}
-	/* .last {
+	.last {
 		background: hsl(261deg 55% 42%);
 		color: #e1e4e8;
 	}
-	.on .last {
-		animation: focus 0.5s;
-	} */
+	.off .last {
+		animation: focus 0.25s;
+	}
 
 	@keyframes focus {
 		0% {
@@ -51,7 +52,7 @@
 		}
 		30% {
 			filter: brightness(1.6);
-			background-color: hsl(261deg 55% 47%);
+			background-color: hsl(261deg 55% 46%);
 		}
 		100% {
 			filter: brightness(1);

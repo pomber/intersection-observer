@@ -32,7 +32,7 @@
 		height: 100%;
 		width: 100%;
 	}
-	.page > h2 {
+	h2 {
 		font-size: 1.5em;
 		margin: 0;
 		padding: 0;

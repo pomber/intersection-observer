@@ -1,5 +1,7 @@
 <script>
+	import Margin from './Margin.svelte'
 	import Overlay from './Overlay.svelte'
+	import { browserTop } from './stores'
 
 	let top = 100
 	let moving = false
@@ -23,8 +25,8 @@
 			let nextTop = prevTop + e.movementY
 			nextTop = Math.max(0, nextTop)
 			nextTop = Math.min(pageHeight - browserHeight, nextTop)
-
 			top = nextTop
+			browserTop.set({ prev: prevTop, next: nextTop })
 		}
 	}
 </script>
@@ -45,6 +47,7 @@
 		<div class="url" />
 		<div />
 	</div>
+	<Margin />
 </div>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
 

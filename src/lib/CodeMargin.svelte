@@ -3,13 +3,22 @@
 
 	// @ts-ignore
 	const setSelection = (e) => {
-		console.log(e)
 		if (!e.key || e.key === 'Enter' || e.key === ' ') {
 			selection.set('margin')
 		} else if (e.key === 'Escape') {
 			selection.set('none')
 		}
 	}
+
+	// @ts-ignore
+	const resetSelection = (e) => {
+		if (selected) {
+			selection.set('none')
+			e.stopPropagation()
+		}
+	}
+
+	$: selected = $selection === 'margin'
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -19,7 +28,10 @@
 	on:click={setSelection}
 	on:keydown={setSelection}
 >
-	<span class="bg">click</span>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<span class="bg" on:click={resetSelection}
+		>{#if selected}close{:else}click to know more{/if}</span
+	>
 	<span class="fg">
 		<span style:white-space="pre" style:color="#E1E4E8">{'  rootMargin: '}</span
 		><span style:color="#9ECBFF"
@@ -48,7 +60,6 @@
 		text-align: right;
 		transition: opacity 0.2s;
 		user-select: none;
-		pointer-events: none;
 	}
 	div:hover .bg,
 	div[data-selection='margin'] .bg {

@@ -2,6 +2,7 @@
 	import CodeMargin from './CodeMargin.svelte'
 	import CodeThreshold from './CodeThreshold.svelte'
 	import CodeTokens from './CodeTokens.svelte'
+	import { selection } from './stores'
 
 	const first = [
 		['let', '#F97583'],
@@ -14,5 +15,11 @@
 
 <CodeTokens tokens={first} br />
 <CodeMargin />
-<CodeThreshold />
-<CodeTokens tokens={closeLine} />
+<div
+	class="post-margin"
+	style:transform="translateY({$selection == 'margin' ? 1 : 0}em)"
+	style:transition="transform 0.2s"
+>
+	<CodeThreshold />
+	<CodeTokens tokens={closeLine} />
+</div>

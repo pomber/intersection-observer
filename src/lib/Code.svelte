@@ -7,6 +7,7 @@
 <pre>
 	<code>
 		<CodeOptions />
+		<br />
 		<CodeCallback />
 		<br />
 		<CodeObserver />

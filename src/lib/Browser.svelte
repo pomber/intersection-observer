@@ -55,7 +55,6 @@
 	.browser {
 		width: 100%;
 		height: 200px;
-		background: #2222;
 		position: absolute;
 		user-select: none;
 		cursor: move;

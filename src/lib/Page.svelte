@@ -26,7 +26,7 @@
 <style>
 	.page {
 		position: absolute;
-		background-color: #eee;
+		background-color: #fafafa;
 		padding: 0 10px;
 		box-sizing: border-box;
 		height: 100%;

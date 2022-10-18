@@ -1,4 +1,6 @@
 <script>
+	import CodeMargin from './CodeMargin.svelte'
+	import CodeThreshold from './CodeThreshold.svelte'
 	import CodeTokens from './CodeTokens.svelte'
 
 	const first = [
@@ -7,13 +9,10 @@
 		['=', '#F97583'],
 		[' {', '#E1E4E8'],
 	]
-	const thresholdsLine = [
-		['  threshold: [', '#E1E4E8'],
-		[']', '#E1E4E8'],
-	]
 	const closeLine = [['}', '#E1E4E8']]
 </script>
 
 <CodeTokens tokens={first} br />
-<CodeTokens tokens={thresholdsLine} /><br />
+<CodeMargin />
+<CodeThreshold />
 <CodeTokens tokens={closeLine} />

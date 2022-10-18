@@ -17,6 +17,8 @@ type Entry = {
 	threshold: number
 }
 
+export const selection = writable('none' as 'none' | 'margin' | 'threshold')
+
 export const settings = writable({
 	browserHeight: 200,
 	pageHeight: 620,

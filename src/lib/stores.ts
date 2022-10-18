@@ -61,7 +61,7 @@ export const entries = derived(
 		const nextTop = $top.next + $controls.margin.top
 
 		const rootHeight =
-			$settings.browserHeight - $controls.margin.top - $controls.margin.top
+			$settings.browserHeight - $controls.margin.top - $controls.margin.bottom
 		const entries = [] as Entry[]
 
 		$settings.elements.forEach((element) => {
@@ -70,8 +70,8 @@ export const entries = derived(
 			)
 			for (const box of elementBoxes) {
 				if (
-					(prevTop < box.top && box.top <= nextTop) ||
-					(nextTop <= box.top && box.top < prevTop)
+					(prevTop <= box.top && box.top < nextTop) ||
+					(nextTop < box.top && box.top <= prevTop)
 				) {
 					const intersectionRatio = getIntersectionRatio(
 						nextTop,
@@ -87,6 +87,7 @@ export const entries = derived(
 						targetId: element.id,
 						box,
 					})
+					break
 				}
 			}
 		})
@@ -109,6 +110,8 @@ function getIntersectionRatio(
 
 	const top = Math.max(browserTop, elementTop)
 	const bottom = Math.min(browserBottom, elementBottom)
+
+	console.log({ top, bottom })
 
 	const percentVisible = Math.max(bottom - top, 0) / elementHeight
 	return percentVisible

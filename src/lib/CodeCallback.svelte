@@ -88,37 +88,40 @@
 		if (i === 2) {
 			return [
 				...line,
-				{ content: ' ' },
-				...$entries.map((entry) => ({
-					content: entry.targetId,
-					i: 10,
-					trace: true,
-					value: true,
-				})),
+				...$entries.flatMap((entry) => [
+					{ content: ' ' },
+					{ content: entry.targetId, i: 10, trace: true, value: true },
+				]),
 			]
 		}
 		if (i === 3) {
 			return [
 				...line,
 				{ content: ' ' },
-				...$entries.map((entry) => ({
-					content: entry.isIntersecting,
-					i: 13,
-					trace: true,
-					value: true,
-				})),
+				...$entries.flatMap((entry) => [
+					{ content: ' ' },
+					{
+						content: entry.isIntersecting,
+						i: 13,
+						trace: true,
+						value: true,
+					},
+				]),
 			]
 		}
 		if (i === 4) {
 			return [
 				...line,
 				{ content: ' ' },
-				...$entries.map((entry) => ({
-					content: entry.intersectionRatio.toFixed(3),
-					i: 16,
-					trace: true,
-					value: true,
-				})),
+				...$entries.flatMap((entry) => [
+					{ content: ' ' },
+					{
+						content: entry.intersectionRatio.toFixed(3),
+						i: 16,
+						trace: true,
+						value: true,
+					},
+				]),
 			]
 		}
 		return line

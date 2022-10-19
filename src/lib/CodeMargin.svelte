@@ -69,21 +69,21 @@
 			style:color="#9ECBFF"
 		>
 			<span class="number"
-				>{$controls.margin.top}px<span class="buttons"
-					><CodeMarginButtons
-						decrease={decreaseTop}
-						increase={increaseTop}
-					/></span
-				></span
+				>{$controls.margin.top}px{#if selected}<span class="buttons"
+						><CodeMarginButtons
+							decrease={decreaseTop}
+							increase={increaseTop}
+						/></span
+					>{/if}</span
 			>,
 			<span>0px</span>,
 			<span class="number"
-				>{$controls.margin.bottom}px<span class="buttons"
-					><CodeMarginButtons
-						decrease={decreaseBottom}
-						increase={increaseBottom}
-					/></span
-				></span
+				>{$controls.margin.bottom}px{#if selected}<span class="buttons"
+						><CodeMarginButtons
+							decrease={decreaseBottom}
+							increase={increaseBottom}
+						/></span
+					>{/if}</span
 			>,
 			<span>0px</span>"</span
 		><span style:color="#E1E4E8">{','}</span>

@@ -43,16 +43,19 @@
 
 <style>
 	.group {
+		display: inline-block;
 		font-size: 6px;
 		border-radius: 4px;
 		border: 1px solid hsl(261deg 55% 60%);
 		overflow: hidden;
 		background: hsl(215deg 28% 17%);
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		width: 40px;
+		height: 20px;
+		position: relative;
 	}
 	button {
+		display: inline-block;
+		position: absolute;
 		width: 20px;
 		height: 20px;
 		border: none;
@@ -64,6 +67,12 @@
 		cursor: pointer;
 		user-select: none;
 		transition: opacity 0.2s ease;
+	}
+	button:first-child {
+		left: 0;
+	}
+	button:last-child {
+		right: 0;
 	}
 	button:hover {
 		background: hsl(215deg 28% 30%);

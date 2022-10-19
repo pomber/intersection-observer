@@ -110,6 +110,8 @@
 		left: 50%;
 		top: 0;
 		transition: opacity 0.2s, transform 0.2s ease-out;
+		user-select: none;
+		height: 22px;
 	}
 
 	.selected .buttons {

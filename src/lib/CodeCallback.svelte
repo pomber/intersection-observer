@@ -139,8 +139,9 @@
 <div class={isOff ? 'off' : 'on'}>
 	<CodeTokens tokens={firstLine} br />
 	{#each callback as line}
-		<div style:white-space="pre">
+		<div>
 			{#each line as { content, color, trace, value, i }}<span
+					style:white-space="pre"
 					style:color
 					class:trace
 					class:value

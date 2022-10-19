@@ -43,8 +43,8 @@ export const settings = writable({
 })
 
 export const controls = writable({
-	margin: { top: 100, bottom: -100 },
-	thresholds: [0, 0.3],
+	margin: { top: 0, bottom: 0 },
+	thresholds: [0.2, 0.6],
 })
 
 export const boxes = derived([settings, controls], ([$settings, $controls]) => {

@@ -1,4 +1,4 @@
-<div class="dialog">dialog</div>
+<div class="dialog">work in progress</div>
 
 <style>
 	.dialog {

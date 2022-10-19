@@ -1,4 +1,5 @@
 <script>
+	import CodeThresholdAdd from './CodeThresholdAdd.svelte'
 	import CodeThresholdButtons from './CodeThresholdButtons.svelte'
 	import { controls, selection } from './stores'
 
@@ -54,6 +55,23 @@
 	}
 
 	/**
+	 * @param {{ stopPropagation: () => void; }} e
+	 */
+	function append(e) {
+		console.log(e)
+		e.stopPropagation()
+		if ($controls.thresholds.length >= 3) return
+		controls.update((c) => {
+			const { thresholds } = c
+			const values = thresholds.slice()
+			const last = values[values.length - 1] || 0
+			values.push(round(Math.min(1, last + 0.1)))
+			c.thresholds = values
+			return c
+		})
+	}
+
+	/**
 	 * @param {number} value
 	 */
 	function round(value) {
@@ -71,21 +89,24 @@
 >
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<span class="bg" on:click={resetSelection}
-		>{#if selected}close{:else}click to know more{/if}</span
+		>{#if selected}close{:else}edit{/if}</span
 	>
 	<span class="fg">
 		<span style:white-space="pre" style:color="#E1E4E8">{'  threshold: ['}</span
 		><span style:color="#9ECBFF"
 			>{#each $controls.thresholds as t, i}<span class="number"
-					>{t.toFixed(2)}<span class="buttons"
-						><CodeThresholdButtons
-							decrease={() => decrease(i)}
-							remove={() => remove(i)}
-							increase={() => increase(i)}
-						/></span
-					></span
+					>{t.toFixed(2)}{#if selected}<span class="buttons"
+							><CodeThresholdButtons
+								decrease={() => decrease(i)}
+								remove={() => remove(i)}
+								increase={() => increase(i)}
+							/></span
+						>{/if}</span
 				>{#if i < $controls.thresholds.length - 1},{/if}{/each}</span
-		><span style:color="#E1E4E8">{']'}</span></span
+		><span style:color="#E1E4E8">{']'}</span
+		>{#if $controls.thresholds.length < 3}<span class="append"
+				><CodeThresholdAdd on:click={append} /></span
+			>{/if}</span
 	>
 </div>
 
@@ -130,6 +151,15 @@
 		transition: opacity 0.2s, transform 0.2s ease-out;
 		user-select: none;
 		height: 22px;
+	}
+
+	.append {
+		opacity: 0;
+		transition: opacity 0.2s;
+	}
+
+	.selected .append {
+		opacity: 1;
 	}
 
 	.selected .buttons {

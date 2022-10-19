@@ -1,4 +1,5 @@
 <script>
+	import CodeMarginButtons from './CodeMarginButtons.svelte'
 	import { controls, selection } from './stores'
 
 	// @ts-ignore
@@ -19,31 +20,106 @@
 	}
 
 	$: selected = $selection === 'margin'
+
+	function decreaseTop() {
+		controls.update((c) => {
+			c.margin.top = c.margin.top - 10
+			return c
+		})
+	}
+
+	function increaseTop() {
+		controls.update((c) => {
+			c.margin.top = c.margin.top + 10
+			return c
+		})
+	}
+
+	function decreaseBottom() {
+		controls.update((c) => {
+			c.margin.bottom = c.margin.bottom - 10
+			return c
+		})
+	}
+
+	function increaseBottom() {
+		controls.update((c) => {
+			c.margin.bottom = c.margin.bottom + 10
+			return c
+		})
+	}
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 <div
 	tabindex="0"
+	class:selected
 	data-selection={$selection}
 	on:click={setSelection}
 	on:keydown={setSelection}
 >
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<span class="bg" on:click={resetSelection}
-		>{#if selected}close{:else}click to know more{/if}</span
+		>{#if selected}close{:else}click for more{/if}</span
 	>
 	<span class="fg">
 		<span style:white-space="pre" style:color="#E1E4E8">{'  rootMargin: '}</span
-		><span style:color="#9ECBFF"
-			>{`"${$controls.margin.top}px 0px ${$controls.margin.bottom}px 0px"`}</span
-		><span style:color="#E1E4E8">{','}</span></span
-	>
+		><span style:color="#9ECBFF">"</span><span
+			class="numbers"
+			style:color="#9ECBFF"
+		>
+			<span class="number"
+				>{$controls.margin.top}px<span class="buttons"
+					><CodeMarginButtons
+						decrease={decreaseTop}
+						increase={increaseTop}
+					/></span
+				></span
+			>,
+			<span>0px</span>,
+			<span class="number"
+				>{$controls.margin.bottom}px<span class="buttons"
+					><CodeMarginButtons
+						decrease={decreaseBottom}
+						increase={increaseBottom}
+					/></span
+				></span
+			>,
+			<span>0px</span>"</span
+		><span style:color="#E1E4E8">{','}</span>
+	</span>
 </div>
 
 <style>
 	div {
 		position: relative;
 		cursor: pointer;
+	}
+	.number {
+		position: relative;
+		display: inline-block;
+		min-width: 3ch;
+		text-align: center;
+		transition: min-width 0.2s;
+	}
+
+	.buttons {
+		position: absolute;
+		opacity: 0;
+		transform: translate(-50%, 50%);
+		left: 50%;
+		top: 0;
+		transition: opacity 0.2s, transform 0.2s ease-out;
+	}
+
+	.selected .buttons {
+		transform: translate(-50%, 100%);
+		display: inline-block;
+		opacity: 1;
+	}
+
+	.selected .number {
+		min-width: 6ch;
 	}
 	.fg {
 		position: relative;
@@ -62,7 +138,7 @@
 		user-select: none;
 	}
 	div:hover .bg,
-	div[data-selection='margin'] .bg {
+	.selected .bg {
 		opacity: 0.7;
 	}
 </style>

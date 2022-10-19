@@ -43,7 +43,7 @@ export const settings = writable({
 })
 
 export const controls = writable({
-	margin: { top: 10, bottom: 0 },
+	margin: { top: 100, bottom: -100 },
 	thresholds: [0, 0.3],
 })
 

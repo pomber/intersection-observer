@@ -17,7 +17,7 @@
 <CodeMargin />
 <div
 	class="post-margin"
-	style:transform="translateY({$selection == 'margin' ? 1 : 0}em)"
+	style:transform="translateY({$selection == 'margin' ? 1.4 : 0}em)"
 	style:transition="transform 0.2s"
 >
 	<CodeThreshold />

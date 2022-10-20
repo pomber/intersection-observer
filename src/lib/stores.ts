@@ -17,7 +17,16 @@ type Entry = {
 	threshold: number
 }
 
-export const selection = writable('none' as 'none' | 'margin' | 'threshold')
+export type Selection =
+	| 'none'
+	| 'margin'
+	| 'threshold'
+	| 'callback'
+	| 'observer'
+
+export const selection = writable('none' as Selection)
+
+export const preSelection = writable('none' as Selection)
 
 export const settings = writable({
 	browserHeight: 200,
@@ -110,8 +119,6 @@ function getIntersectionRatio(
 
 	const top = Math.max(browserTop, elementTop)
 	const bottom = Math.min(browserBottom, elementBottom)
-
-	console.log({ top, bottom })
 
 	const percentVisible = Math.max(bottom - top, 0) / elementHeight
 	return percentVisible

@@ -1,6 +1,6 @@
 <script>
 	import CodeMarginButtons from './CodeMarginButtons.svelte'
-	import { controls, selection } from './stores'
+	import { controls, selection, preSelection } from './stores'
 
 	// @ts-ignore
 	const setSelection = (e) => {
@@ -20,6 +20,7 @@
 	}
 
 	$: selected = $selection === 'margin'
+	$: preSelected = $preSelection === 'margin'
 
 	function decreaseTop() {
 		controls.update((c) => {
@@ -54,6 +55,7 @@
 <div
 	tabindex="0"
 	class:selected
+	class:preSelected
 	data-selection={$selection}
 	on:click={setSelection}
 	on:keydown={setSelection}
@@ -75,8 +77,8 @@
 							increase={increaseTop}
 						/></span
 					>{/if}</span
-			>,
-			<span>0px</span>,
+			>
+			<span>0px</span>
 			<span class="number"
 				>{$controls.margin.bottom}px{#if selected}<span class="buttons"
 						><CodeMarginButtons
@@ -84,7 +86,7 @@
 							increase={increaseBottom}
 						/></span
 					>{/if}</span
-			>,
+			>
 			<span>0px</span>"</span
 		><span style:color="#E1E4E8">{','}</span>
 	</span>
@@ -134,12 +136,13 @@
 		right: -1em;
 		padding-right: 1em;
 		height: 100%;
-		background-color: #58a6ff33;
+		background-color: rgb(33, 47, 65);
 		text-align: right;
 		transition: opacity 0.2s;
 		user-select: none;
 	}
 	div:hover .bg,
+	.preSelected .bg,
 	.selected .bg {
 		opacity: 0.7;
 	}

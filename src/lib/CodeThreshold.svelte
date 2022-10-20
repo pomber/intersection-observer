@@ -1,7 +1,7 @@
 <script>
 	import CodeThresholdAdd from './CodeThresholdAdd.svelte'
 	import CodeThresholdButtons from './CodeThresholdButtons.svelte'
-	import { controls, selection } from './stores'
+	import { controls, selection, preSelection } from './stores'
 
 	// @ts-ignore
 	const setSelection = (e) => {
@@ -20,6 +20,7 @@
 	}
 
 	$: selected = $selection === 'threshold'
+	$: preSelected = $preSelection === 'threshold'
 
 	/**
 	 * @param {number} i
@@ -58,7 +59,6 @@
 	 * @param {{ stopPropagation: () => void; }} e
 	 */
 	function append(e) {
-		console.log(e)
 		e.stopPropagation()
 		if ($controls.thresholds.length >= 3) return
 		controls.update((c) => {
@@ -83,6 +83,7 @@
 <div
 	tabindex="0"
 	class:selected
+	class:preSelected
 	data-selection={$selection}
 	on:click={setSelection}
 	on:keydown={setSelection}
@@ -126,7 +127,7 @@
 		right: -1em;
 		padding-right: 1em;
 		height: 100%;
-		background-color: #58a6ff33;
+		background-color: rgb(57, 45, 39);
 		text-align: right;
 		transition: opacity 0.2s;
 		user-select: none;
@@ -168,6 +169,7 @@
 		opacity: 1;
 	}
 	div:hover .bg,
+	.preSelected .bg,
 	.selected .bg {
 		opacity: 0.7;
 	}

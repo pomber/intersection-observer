@@ -1,5 +1,6 @@
 <script>
 	import CodeTokens from './CodeTokens.svelte'
+	import { preSelection, selection } from './stores'
 
 	const lines = [
 		[
@@ -32,6 +33,40 @@
 			['))', '#E1E4E8'],
 		],
 	]
+	$: selected = $selection === 'observer'
+	$: preSelected = $preSelection === 'observer'
 </script>
 
-{#each lines as line}<CodeTokens tokens={line} br />{/each}
+<div class="observer" class:selected class:preSelected>
+	<span class="bg" />
+	<span class="code">
+		{#each lines as line}<CodeTokens tokens={line} br />{/each}</span
+	>
+</div>
+
+<style>
+	.observer {
+		position: relative;
+	}
+	.code {
+		position: relative;
+	}
+	.bg {
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: -1em;
+		right: -1em;
+		padding-right: 1em;
+		height: 100%;
+		background-color: rgb(34, 56, 43);
+		text-align: right;
+		transition: opacity 0.2s;
+		user-select: none;
+	}
+	.observer:hover .bg,
+	.preSelected .bg,
+	.selected .bg {
+		opacity: 0.8;
+	}
+</style>

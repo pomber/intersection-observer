@@ -2,7 +2,10 @@
 	// @ts-nocheck
 
 	import CodeTokens from './CodeTokens.svelte'
-	import { entries } from './stores'
+	import { entries, selection, preSelection } from './stores'
+
+	$: selected = $selection === 'callback'
+	$: preSelected = $preSelection === 'callback'
 
 	const lines = [
 		[
@@ -136,23 +139,50 @@
 	})
 </script>
 
-<div class={isOff ? 'off' : 'on'}>
-	<CodeTokens tokens={firstLine} br />
-	{#each callback as line}
-		<div>
-			{#each line as { content, color, trace, value, i }}<span
-					style:white-space="pre"
-					style:color
-					class:trace
-					class:value
-					style={i != null ? `--i: ${i}` : ''}>{content}</span
-				>{/each}
-		</div>
-	{/each}
-	<CodeTokens tokens={lastLine} br />
+<div class="callback {isOff ? 'off' : 'on'}" class:selected class:preSelected>
+	<span class="bg" />
+	<span class="code">
+		<CodeTokens tokens={firstLine} br />
+		{#each callback as line}
+			<div>
+				{#each line as { content, color, trace, value, i }}<span
+						style:white-space="pre"
+						style:color
+						class:trace
+						class:value
+						style={i != null ? `--i: ${i}` : ''}>{content}</span
+					>{/each}
+			</div>
+		{/each}
+		<CodeTokens tokens={lastLine} br /></span
+	>
 </div>
 
 <style>
+	.callback {
+		position: relative;
+	}
+	.code {
+		position: relative;
+	}
+	.bg {
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: -1em;
+		right: -1em;
+		padding-right: 1em;
+		height: 100%;
+		background-color: rgb(43, 40, 62);
+		text-align: right;
+		transition: opacity 0.2s;
+		user-select: none;
+	}
+	.callback:hover .bg,
+	.preSelected .bg,
+	.selected .bg {
+		opacity: 0.8;
+	}
 	.trace {
 		border-radius: 0.25rem;
 	}

@@ -1,5 +1,5 @@
 <script>
-	import { boxes, entries, isOff } from './stores'
+	import { boxes, entries, isOff, settings } from './stores'
 </script>
 
 <div class="boxes {$isOff ? 'off' : 'on'}">
@@ -14,7 +14,9 @@
 			style:text-align={box.textAlign}
 			class:last={$entries.some((e) => e.box === box)}
 		>
-			{box.threshold.toFixed(2)}
+			{#if $settings.showRulers}
+				{box.threshold.toFixed(2)}
+			{/if}
 		</div>
 	{/each}
 </div>

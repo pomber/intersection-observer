@@ -1,9 +1,11 @@
 <script>
-	import { selection } from './stores'
+	import { selection, demo } from './stores'
 	import DialogToken from './DialogToken.svelte'
 </script>
 
-{#if $selection == 'none'}
+{#if $demo == 'scrollytelling'}
+	<div class="dialog">scrolly</div>
+{:else if $selection == 'none'}
 	<div class="dialog">
 		<DialogToken color="rgb(126, 231, 135)" selection="observer"
 			>IntersectionObserver</DialogToken
@@ -21,25 +23,23 @@
 			>callback</DialogToken
 		> that will run for each intersection.
 	</div>
-{/if}
-{#if $selection == 'margin'}
+{:else if $selection == 'margin'}
 	<div class="dialog" style:background-color="rgba(33, 47, 65, 0.7)">
-		somethin
+		To change the section of the viewport you want to observe you can use the
+		rootMargin option. The syntax is similar to the CSS margin, but you can only
+		use pixels or percentages. The default is "0px".
 	</div>
-{/if}
-{#if $selection == 'threshold'}
+{:else if $selection == 'threshold'}
 	<div class="dialog" style:background-color="rgba(57, 45, 39, 0.7)">
-		somethin
+		lorem ipsum threshold
 	</div>
-{/if}
-{#if $selection == 'callback'}
+{:else if $selection == 'callback'}
 	<div class="dialog" style:background-color="rgba(43, 40, 62, 0.7)">
-		somethin
+		lorem ipsum callback
 	</div>
-{/if}
-{#if $selection == 'observer'}
+{:else if $selection == 'observer'}
 	<div class="dialog" style:background-color="rgba(34, 56, 43, 0.7)">
-		somethin
+		lorem ipsum observer
 	</div>
 {/if}
 

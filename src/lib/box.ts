@@ -1,8 +1,10 @@
 // things that don't change go into settings
-type Settings = {
+export type Settings = {
+	showRulers: boolean
 	browserHeight: number
 	pageHeight: number
 	boxWidth: number
+	title: string
 	elements: Element[]
 }
 type Element = {

@@ -1,5 +1,5 @@
 import { writable, derived } from 'svelte/store'
-import { getBoxes, type Box } from './box'
+import { getBoxes, type Box, type Settings } from './box'
 
 const oneTop = 120
 const oneLeft = 10
@@ -24,11 +24,31 @@ export type Selection =
 	| 'callback'
 	| 'observer'
 
-export const selection = writable('none' as Selection)
+export const demo = writable<'playground' | 'scrollytelling' | 'lazyloading'>(
+	'playground'
+)
+export const controls = writable({
+	margin: { top: 0, bottom: 0 },
+	thresholds: [0.2, 0.6],
+})
 
-export const preSelection = writable('none' as Selection)
+demo.subscribe(($demo) => {
+	if ($demo === 'playground') {
+		controls.set({
+			margin: { top: 0, bottom: 0 },
+			thresholds: [0.2, 0.6],
+		})
+	}
+	if ($demo === 'scrollytelling') {
+		controls.set({
+			margin: { top: 200 * 0.46, bottom: 200 * 0.46 },
+			thresholds: [0],
+		})
+	}
+})
 
-export const settings = writable({
+const playgroundSettings = {
+	showRulers: true,
 	browserHeight: 200,
 	pageHeight: 620,
 	boxWidth: 20,
@@ -49,12 +69,63 @@ export const settings = writable({
 			left: twoLeft,
 		},
 	],
-})
+} as Settings
 
-export const controls = writable({
-	margin: { top: 0, bottom: 0 },
-	thresholds: [0.2, 0.6],
-})
+export const selection = writable<Selection>('none')
+export const preSelection = writable<Selection>('none')
+export const settings = derived(
+	[demo],
+	([$demo]) => {
+		if ($demo === 'scrollytelling') {
+			return {
+				showRulers: false,
+				browserHeight: 200,
+				pageHeight: 620,
+				boxWidth: 20,
+				title: 'scrollytelling',
+				elements: [
+					{
+						id: '.step 1',
+						top: 80,
+						width: 185,
+						height: 100,
+						left: 10,
+					},
+					{
+						id: '.step 2',
+						top: 210,
+						width: 185,
+						height: 40,
+						left: 10,
+					},
+					{
+						id: '.step 3',
+						top: 280,
+						width: 185,
+						height: 60,
+						left: 10,
+					},
+					{
+						id: '.step 4',
+						top: 370,
+						width: 185,
+						height: 50,
+						left: 10,
+					},
+					{
+						id: '.step 5',
+						top: 460,
+						width: 185,
+						height: 80,
+						left: 10,
+					},
+				],
+			} as Settings
+		}
+		return playgroundSettings
+	},
+	playgroundSettings
+)
 
 export const boxes = derived([settings, controls], ([$settings, $controls]) => {
 	const { margin, thresholds } = $controls
@@ -130,3 +201,15 @@ export const isOff = derived([entries], ([$entries], set) => {
 		set(false)
 	}, 250)
 })
+
+export const currentIndex = derived(
+	[entries, settings],
+	([$entries, $settings], set) => {
+		const [entry] = $entries.filter((e) => e.isIntersecting)
+		if (entry) {
+			const index = $settings.elements.findIndex((e) => e.id === entry.targetId)
+			set(index + 1)
+		}
+	},
+	1
+)

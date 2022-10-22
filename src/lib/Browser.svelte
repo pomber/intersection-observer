@@ -1,7 +1,7 @@
 <script>
 	import Margin from './Margin.svelte'
 	import Overlay from './Overlay.svelte'
-	import { browserTop } from './stores'
+	import { browserTop, demo, currentIndex } from './stores'
 
 	let top = 100
 	let moving = false
@@ -47,6 +47,11 @@
 		<div class="url" />
 		<div />
 	</div>
+	{#if $demo === 'scrollytelling'}
+		<div class="sticker" style:top="{(browserHeight - 80) / 2}px">
+			{$currentIndex}
+		</div>
+	{/if}
 	<Margin />
 </div>
 <svelte:window on:mouseup={onMouseUp} on:mousemove={onMouseMove} />
@@ -113,5 +118,19 @@
 	.frame-button {
 		border-color: #5c5c5c;
 		background-color: #535353;
+	}
+	.sticker {
+		position: absolute;
+		left: 205px;
+		width: 185px;
+		background: #ccc;
+		color: #333;
+		border-radius: 6px;
+		height: 80px;
+		box-sizing: border-box;
+		padding: 10px;
+		display: grid;
+		place-items: center;
+		font-size: 2.6em;
 	}
 </style>

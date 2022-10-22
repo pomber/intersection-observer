@@ -1,7 +1,7 @@
 <script>
-	import { settings } from './stores'
+	import { settings, demo } from './stores'
 
-	const { elements, title } = $settings
+	const { elements, title, showRulers } = $settings
 </script>
 
 <section class="page">
@@ -14,10 +14,12 @@
 			style:width="{element.width}px"
 			style:left="{element.left}px"
 		>
-			<span class="ruler" />
-			<span class="ruler" />
-			<span class="ruler" />
-			<span class="ruler" />
+			{#if showRulers}
+				<span class="ruler" />
+				<span class="ruler" />
+				<span class="ruler" />
+				<span class="ruler" />
+			{/if}
 			<span>{element.id}</span>
 		</div>
 	{/each}

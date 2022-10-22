@@ -2,16 +2,39 @@
 	import Code from './Code.svelte'
 	import Demo from './Demo.svelte'
 	import Dialog from './Dialog.svelte'
+	import ScrollytellingCode from './ScrollytellingCode.svelte'
+	import { demo } from './stores'
 </script>
 
 <main>
 	<div class="bg" />
-	<Demo />
-	<div class="right">
-		<Dialog />
-		<Code />
-	</div>
+	{#if $demo === 'playground'}
+		<Demo />
+		<div class="right">
+			<Dialog />
+			<Code />
+		</div>
+	{/if}
+	{#if $demo === 'lazyloading'}
+		<Demo />
+		<div class="right">
+			<Dialog />
+			<Code />
+		</div>
+	{/if}
+	{#if $demo === 'scrollytelling'}
+		<Demo />
+		<div class="right">
+			<Dialog />
+			<ScrollytellingCode />
+		</div>
+	{/if}
 </main>
+<section>
+	<button on:click={() => demo.set('playground')}>Playground</button>
+	<button on:click={() => demo.set('lazyloading')}>Lazy Loading</button>
+	<button on:click={() => demo.set('scrollytelling')}>Scrollytelling</button>
+</section>
 
 <style>
 	main {

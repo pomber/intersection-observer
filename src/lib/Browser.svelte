@@ -67,7 +67,7 @@
 	}
 	.chrome-top {
 		height: 25px;
-		background: rgb(13, 17, 23);
+		background: hsl(216, 28%, 7%);
 		width: 100%;
 		position: absolute;
 		top: 0;
@@ -92,7 +92,7 @@
 		height: 14px;
 		border-radius: 4px;
 		border: 1px solid #444;
-		background-color: #666;
+		background-color: hsl(216, 28%, 9%);
 		width: 50%;
 	}
 
@@ -132,5 +132,6 @@
 		display: grid;
 		place-items: center;
 		font-size: 2.6em;
+		border: 1px solid #6666;
 	}
 </style>

@@ -29,19 +29,26 @@ export const demo = writable<'playground' | 'scrollytelling' | 'lazyloading'>(
 )
 export const controls = writable({
 	margin: { top: 0, bottom: 0 },
-	thresholds: [0.2, 0.6],
+	thresholds: [0.3, 0.6],
 })
 
 demo.subscribe(($demo) => {
 	if ($demo === 'playground') {
 		controls.set({
 			margin: { top: 0, bottom: 0 },
-			thresholds: [0.2, 0.6],
+			thresholds: [0.3, 0.6],
 		})
 	}
 	if ($demo === 'scrollytelling') {
 		controls.set({
 			margin: { top: 200 * 0.46, bottom: 200 * 0.46 },
+			thresholds: [0],
+		})
+	}
+
+	if ($demo === 'lazyloading') {
+		controls.set({
+			margin: { top: -60, bottom: -60 },
 			thresholds: [0],
 		})
 	}
@@ -121,6 +128,52 @@ export const settings = derived(
 					},
 				],
 			} as Settings
+		}
+		if ($demo === 'lazyloading') {
+			return {
+				showRulers: false,
+				browserHeight: 120,
+				pageHeight: 620,
+				boxWidth: 20,
+				title: 'lazy loading',
+				elements: [
+					{
+						id: '.lazy 1',
+						top: 80,
+						width: 230,
+						height: 100,
+						left: 9,
+					},
+					{
+						id: '.lazy 2',
+						top: 210,
+						width: 230,
+						height: 40,
+						left: 47,
+					},
+					{
+						id: '.lazy 3',
+						top: 280,
+						width: 230,
+						height: 60,
+						left: 47 + 38,
+					},
+					{
+						id: '.lazy 4',
+						top: 370,
+						width: 230,
+						height: 50,
+						left: 47 + 38 * 2,
+					},
+					{
+						id: '.lazy 5',
+						top: 460,
+						width: 240,
+						height: 80,
+						left: 38 + 38 * 3,
+					},
+				],
+			}
 		}
 		return playgroundSettings
 	},

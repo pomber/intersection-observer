@@ -27,6 +27,7 @@
 
 <style>
 	.page {
+		user-select: none;
 		position: absolute;
 		background-color: #fafafa;
 		padding: 0 10px;
@@ -48,6 +49,7 @@
 	.element {
 		background: #ccc;
 		color: #333;
+		border: 1px solid #6666;
 		font-weight: 700;
 		width: 185px;
 		box-sizing: border-box;
